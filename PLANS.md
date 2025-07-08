@@ -1,10 +1,11 @@
 ## v0.1: API
 
-- [ ] GET /public
+- [x] GET /public
   - [x] dummy endpoint
-  - [ ] connect .env
-- [ ] POST /encrypt
-- [ ] POST /decrypt
+  - [x] connect private.pem, generate a public key
+- [ ] POST /sign
+  - [ ] salt
+- [ ] POST /verify
 
 - [ ] Finalization
   - [ ] Logging
