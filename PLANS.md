@@ -10,7 +10,7 @@
 - [x] `Content-Type: text/plain` for GET /public and POST /sign
 
 - [ ] Finalization
-  - [ ] Logging
+  - [x] Logging
   - [ ] Swagger
   - [ ] docker-compose
   - [ ] Review
