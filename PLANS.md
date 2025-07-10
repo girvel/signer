@@ -6,7 +6,7 @@
 - [x] POST /sign
 - [x] POST /verify
 - [x] Extract src/crypto.go
-- [ ] Test /sign + /verify
+- [x] Test /sign + /verify
 - [ ] `Content-Type: text/plain` for GET /public and POST /sign
 
 - [ ] Finalization
