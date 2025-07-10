@@ -9,12 +9,23 @@
 - [x] Test /sign + /verify
 - [x] `Content-Type: text/plain` for GET /public and POST /sign
 
-- [ ] Finalization
+- [x] Finalization 1
   - [x] Logging
-  - [ ] Swagger
+  - [x] Swagger
+
+- [ ] Include signing date
+
+The schema would become:
+
+- GET /public -> plaintext
+- POST /sign plaintext -> json(dated_text, signature)
+- POST /verify json(dated_text, signature) -> 200 empty | 400 plaintext
+
+- [ ] Finalization 2
   - [ ] docker-compose
-  - [ ] Review
   - [ ] Better README
+  - [ ] Do go library paths work with monorepos?
+  - [ ] Review
 
 ## v0.2: Front-end
 
