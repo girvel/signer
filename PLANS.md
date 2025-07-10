@@ -3,10 +3,11 @@
 - [x] GET /public
   - [x] dummy endpoint
   - [x] connect private.pem, generate a public key
-- [ ] POST /sign
-  - [ ]
-- [ ] POST /verify
+- [x] POST /sign
+- [x] POST /verify
+- [ ] Extract src/cryptographer.go
 - [ ] Test /sign + /verify
+- [ ] `Content-Type: text/plain` for GET /public and POST /sign
 
 - [ ] Finalization
   - [ ] Logging

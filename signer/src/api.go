@@ -29,6 +29,11 @@ func CreateAPI(key *rsa.PrivateKey) *gin.Engine {
         c.JSON(http.StatusOK, gin.H{"key": string(pem)})
     })
 
+    pssOptions := rsa.PSSOptions{
+        SaltLength: rsa.PSSSaltLengthAuto,
+        Hash: crypto.SHA256,
+    }
+
     type SignBody struct {
         Data string `json:"data"`
     }
@@ -42,10 +47,7 @@ func CreateAPI(key *rsa.PrivateKey) *gin.Engine {
 
         hashed := sha256.Sum256([]byte(body.Data))
 
-        signature, err := rsa.SignPSS(rand.Reader, key, crypto.SHA256, hashed[:], &rsa.PSSOptions{
-            SaltLength: rsa.PSSSaltLengthAuto,
-            Hash: crypto.SHA256,
-        })
+        signature, err := rsa.SignPSS(rand.Reader, key, crypto.SHA256, hashed[:], &pssOptions)
 
         if err != nil {
             c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
@@ -53,6 +55,34 @@ func CreateAPI(key *rsa.PrivateKey) *gin.Engine {
         }
 
         c.JSON(http.StatusOK, gin.H{"signature": signature})
+    })
+
+    type VerifyBody struct {
+        Data string `json:"data"`
+        Signature []byte `json:"signature"`
+    }
+
+    g.POST("/verify", func (c *gin.Context) {
+        var body VerifyBody
+        if err := c.ShouldBindJSON(&body); err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        }
+
+        hashed := sha256.Sum256([]byte(body.Data))
+
+        err := rsa.VerifyPSS(
+            &key.PublicKey,
+            crypto.SHA256,
+            hashed[:],
+            body.Signature,
+            &pssOptions,
+        )
+
+        result := gin.H{"correct": err == nil}
+        if err != nil {
+            result["error"] = err.Error()
+        }
+        c.JSON(http.StatusOK, result)
     })
 
     return g
