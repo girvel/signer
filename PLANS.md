@@ -4,8 +4,9 @@
   - [x] dummy endpoint
   - [x] connect private.pem, generate a public key
 - [ ] POST /sign
-  - [ ] salt
+  - [ ]
 - [ ] POST /verify
+- [ ] Test /sign + /verify
 
 - [ ] Finalization
   - [ ] Logging
