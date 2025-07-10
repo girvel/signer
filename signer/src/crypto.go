@@ -8,22 +8,16 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"os"
 )
 
 type CryptographerRSA struct {
     key *rsa.PrivateKey
 }
 
-func CreateCryptographerRSA(privateKeyPath string) (*CryptographerRSA, error) {
-    privatePem, err := os.ReadFile(privateKeyPath)
-    if err != nil {
-        return nil, err
-    }
-
+func CreateCryptographerRSA(privatePem []byte) (*CryptographerRSA, error) {
     block, _ := pem.Decode([]byte(privatePem))
     if block == nil {
-        return nil, fmt.Errorf("Failed to decode the ./private.pem")
+        return nil, fmt.Errorf("Failed to decode the private key")
     }
 
     privateKey, err := x509.ParsePKCS8PrivateKey(block.Bytes)
@@ -33,7 +27,7 @@ func CreateCryptographerRSA(privateKeyPath string) (*CryptographerRSA, error) {
 
     rsaPrivateKey, ok := privateKey.(*rsa.PrivateKey)
     if !ok {
-        return nil, fmt.Errorf("Key in ./private.pem is not RSA")
+        return nil, fmt.Errorf("Given private key is not RSA")
     }
 
     return &CryptographerRSA{rsaPrivateKey}, nil
