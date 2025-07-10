@@ -7,13 +7,14 @@
 - [x] POST /verify
 - [x] Extract src/crypto.go
 - [x] Test /sign + /verify
-- [ ] `Content-Type: text/plain` for GET /public and POST /sign
+- [x] `Content-Type: text/plain` for GET /public and POST /sign
 
 - [ ] Finalization
   - [ ] Logging
   - [ ] Swagger
   - [ ] docker-compose
   - [ ] Review
+  - [ ] Better README
 
 ## v0.2: Front-end
 

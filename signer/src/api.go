@@ -1,6 +1,7 @@
 package signer
 
 import (
+	"encoding/base64"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -16,28 +17,29 @@ func CreateAPI(cryptographer Cryptographer) *gin.Engine {
     g := gin.Default()
     
     g.GET("/public", func (c *gin.Context) {
-        c.JSON(http.StatusOK, gin.H{"key": cryptographer.Public()})
+        c.String(http.StatusOK, cryptographer.Public())
     })
 
-    type SignBody struct {
-        Data string `json:"data"`
-    }
-
     g.POST("/sign", func (c *gin.Context) {
-        var body SignBody
-        if err := c.ShouldBindJSON(&body); err != nil {
-            c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        if c.GetHeader("Content-Type") != "text/plain" {
+            c.String(http.StatusUnsupportedMediaType, "Content-Type must be text/plain")
+            return
+        }
+
+        body, err := c.GetRawData()
+        if err != nil {
+            c.String(http.StatusBadRequest, "Error reading body")
             return
         }
         
-        signature, err := cryptographer.Sign(body.Data)
+        signature, err := cryptographer.Sign(string(body))
 
         if err != nil {
-            c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+            c.String(http.StatusInternalServerError, err.Error())
             return
         }
 
-        c.JSON(http.StatusOK, gin.H{"signature": signature})
+        c.String(http.StatusOK, base64.StdEncoding.EncodeToString(signature))
     })
 
     type VerifyBody struct {
