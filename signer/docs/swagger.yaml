@@ -18,19 +18,12 @@ definitions:
     type: object
   signer.VerifyBody:
     properties:
-      data:
+      dated_text:
         type: string
       signature:
-        items:
-          type: integer
-        type: array
+        type: string
     type: object
   signer.VerifyOkResponse:
-    properties:
-      correct:
-        type: boolean
-      message:
-        type: string
     type: object
 info:
   contact: {}
@@ -78,8 +71,8 @@ paths:
     post:
       consumes:
       - application/json
-      description: Verify that given signature matches given text, using the public
-        key
+      description: Verify that given signature matches given text; quality of life
+        feature, can be done locally with the public key.
       parameters:
       - description: Data-signature pair to verify; signature can be passed as base-64
           string
@@ -92,11 +85,15 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Signature matches
           schema:
             $ref: '#/definitions/signer.VerifyOkResponse'
         "400":
-          description: Bad Request
+          description: Bad JSON
+          schema:
+            $ref: '#/definitions/signer.ErrorResponse'
+        "409":
+          description: Signature doesn't match
           schema:
             $ref: '#/definitions/signer.ErrorResponse'
       summary: Verify text + signature

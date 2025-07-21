@@ -31,6 +31,11 @@ type ErrorResponse struct {
     Error string `json:"error"`
 }
 
+type SignaturePair struct {
+    DatedText string `json:"dated_text"`
+	Signature string `json:"signature"`
+}
+
 // @Summary Get the public key
 // @Description Get the public key used for signature verification
 // @Produce plain
@@ -44,17 +49,12 @@ type SignBody struct {
     Text string `json:"text"`
 }
 
-type SignOkResponse struct {
-    DatedText string `json:"dated_text"`
-	Signature string `json:"signature"`
-}
-
 // @Summary Sign the given text
 // @Description Get an RSA PSS signature for given text
 // @Accept json
 // @Produce json
 // @Param body body signer.SignBody true "Text to sign"
-// @Success 200 {object} signer.SignOkResponse "Returns the signature"
+// @Success 200 {object} signer.SignaturePair "Returns the signature"
 // @Failure 400 {object} signer.ErrorResponse "Can't bind JSON from body"
 // @Failure 500 {object} signer.ErrorResponse "Issues with cryptography algorithm"
 // @Router /sign [post]
@@ -79,48 +79,46 @@ func (d *deps) sign(c *gin.Context) {
         return
     }
 
-	c.JSON(http.StatusOK, SignOkResponse{
+	c.JSON(http.StatusOK, SignaturePair{
 		DatedText: datedText, 
 		Signature: base64.StdEncoding.EncodeToString(signature),
 	})
 }
 
-type VerifyBody struct {
-    Data string `json:"data"`
-    Signature []byte `json:"signature"`
-}
+type VerifyOkResponse struct {}
 
-type VerifyOkResponse struct {
-    Correct bool `json:"correct"`
-    Message string `json:"message"`
-}
+// TODO either endpoint functions are public too, or types are private
 
 // @Summary Verify text + signature
-// @Description Verify that given signature matches given text, using the public key
+// @Description Verify that given signature matches given text; quality of life feature, can be done locally with the public key.
 // @Accept json
 // @Produce json
-// @Param body body signer.VerifyBody true "Data-signature pair to verify; signature can be passed as base-64 string"
-// @Success 200 {object} signer.VerifyOkResponse
-// @Failure 400 {object} signer.ErrorResponse
+// @Param body body signer.SignaturePair true "Data-signature pair to verify; signature can be passed as base-64 string"
+// @Success 200 {object} signer.VerifyOkResponse "Signature matches"
+// @Failure 400 {object} signer.ErrorResponse "Bad JSON"
+// @Failure 409 {object} signer.ErrorResponse "Signature doesn't match"
 // @Router /verify [post]
 func (d *deps) verify(c *gin.Context) {
-    var body VerifyBody
+    var body SignaturePair
     if err := c.ShouldBindJSON(&body); err != nil {
         c.JSON(http.StatusBadRequest, ErrorResponse{err.Error()})
         return
     }
 
-    err := d.cryptographer.Verify(body.Data, body.Signature)
+	rawSignature, err := base64.StdEncoding.DecodeString(body.Signature)
+	if err != nil {
+	    c.JSON(http.StatusBadRequest, ErrorResponse{err.Error()})
+		return
+	}
 
-    result := VerifyOkResponse{
-        Correct: err == nil,
-    }
+    err = d.cryptographer.Verify(body.DatedText, rawSignature)
 
     if err != nil {
-        result.Message = err.Error()
+		c.JSON(http.StatusConflict, ErrorResponse{err.Error()})
+		return
     }
 
-    c.JSON(http.StatusOK, result)
+    c.JSON(http.StatusOK, VerifyOkResponse{})
 }
 
 // FACTORY //

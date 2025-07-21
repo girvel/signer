@@ -77,7 +77,7 @@ const docTemplate = `{
         },
         "/verify": {
             "post": {
-                "description": "Verify that given signature matches given text, using the public key",
+                "description": "Verify that given signature matches given text; quality of life feature, can be done locally with the public key.",
                 "consumes": [
                     "application/json"
                 ],
@@ -98,13 +98,19 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Signature matches",
                         "schema": {
                             "$ref": "#/definitions/signer.VerifyOkResponse"
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "Bad JSON",
+                        "schema": {
+                            "$ref": "#/definitions/signer.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Signature doesn't match",
                         "schema": {
                             "$ref": "#/definitions/signer.ErrorResponse"
                         }
@@ -144,27 +150,16 @@ const docTemplate = `{
         "signer.VerifyBody": {
             "type": "object",
             "properties": {
-                "data": {
+                "dated_text": {
                     "type": "string"
                 },
                 "signature": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
+                    "type": "string"
                 }
             }
         },
         "signer.VerifyOkResponse": {
-            "type": "object",
-            "properties": {
-                "correct": {
-                    "type": "boolean"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         }
     }
 }`

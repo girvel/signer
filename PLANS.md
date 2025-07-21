@@ -19,7 +19,7 @@ The schema would become:
 
 - [x] GET /public -> plaintext
 - [x] POST /sign json(text) -> json(dated_text, signature)
-- [ ] POST /verify json(dated_text, signature) -> 200 empty | 400 empty
+- [x] POST /verify json(dated_text, signature) -> json()
 
 - [ ] Finalization 2
   - [ ] docker-compose
