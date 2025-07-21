@@ -1,4 +1,21 @@
 definitions:
+  signer.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  signer.SignBody:
+    properties:
+      text:
+        type: string
+    type: object
+  signer.SignOkResponse:
+    properties:
+      dated_text:
+        type: string
+      signature:
+        type: string
+    type: object
   signer.VerifyBody:
     properties:
       data:
@@ -7,11 +24,6 @@ definitions:
         items:
           type: integer
         type: array
-    type: object
-  signer.VerifyErrorResponse:
-    properties:
-      error:
-        type: string
     type: object
   signer.VerifyOkResponse:
     properties:
@@ -37,7 +49,7 @@ paths:
   /sign:
     post:
       consumes:
-      - text/plain
+      - application/json
       description: Get an RSA PSS signature for given text
       parameters:
       - description: Text to sign
@@ -45,26 +57,22 @@ paths:
         name: body
         required: true
         schema:
-          type: string
+          $ref: '#/definitions/signer.SignBody'
       produces:
-      - text/plain
+      - application/json
       responses:
         "200":
           description: Returns the signature
           schema:
-            type: string
+            $ref: '#/definitions/signer.SignOkResponse'
         "400":
-          description: Can't read body
+          description: Can't bind JSON from body
           schema:
-            type: string
-        "415":
-          description: Content-Type is not text/plain
-          schema:
-            type: string
+            $ref: '#/definitions/signer.ErrorResponse'
         "500":
           description: Issues with cryptography algorithm
           schema:
-            type: string
+            $ref: '#/definitions/signer.ErrorResponse'
       summary: Sign the given text
   /verify:
     post:
@@ -90,6 +98,6 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/signer.VerifyErrorResponse'
+            $ref: '#/definitions/signer.ErrorResponse'
       summary: Verify text + signature
 swagger: "2.0"

@@ -36,10 +36,10 @@ const docTemplate = `{
             "post": {
                 "description": "Get an RSA PSS signature for given text",
                 "consumes": [
-                    "text/plain"
+                    "application/json"
                 ],
                 "produces": [
-                    "text/plain"
+                    "application/json"
                 ],
                 "summary": "Sign the given text",
                 "parameters": [
@@ -49,7 +49,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/signer.SignBody"
                         }
                     }
                 ],
@@ -57,25 +57,19 @@ const docTemplate = `{
                     "200": {
                         "description": "Returns the signature",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/signer.SignOkResponse"
                         }
                     },
                     "400": {
-                        "description": "Can't read body",
+                        "description": "Can't bind JSON from body",
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "415": {
-                        "description": "Content-Type is not text/plain",
-                        "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/signer.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Issues with cryptography algorithm",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/signer.ErrorResponse"
                         }
                     }
                 }
@@ -112,7 +106,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/signer.VerifyErrorResponse"
+                            "$ref": "#/definitions/signer.ErrorResponse"
                         }
                     }
                 }
@@ -120,6 +114,33 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "signer.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "signer.SignBody": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "signer.SignOkResponse": {
+            "type": "object",
+            "properties": {
+                "dated_text": {
+                    "type": "string"
+                },
+                "signature": {
+                    "type": "string"
+                }
+            }
+        },
         "signer.VerifyBody": {
             "type": "object",
             "properties": {
@@ -131,14 +152,6 @@ const docTemplate = `{
                     "items": {
                         "type": "integer"
                     }
-                }
-            }
-        },
-        "signer.VerifyErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string"
                 }
             }
         },
