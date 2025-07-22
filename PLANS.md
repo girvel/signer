@@ -33,8 +33,9 @@ The schema would become:
   - [x] Missing env_file in docker-compose.yml
   - [x] Caching headers for /public
   - [x] Log internal errors
-  - [ ] All endpoints in plain text, keep both the dated text & its signature concatenated into a
+  - [x] All endpoints in plain text, keep both the dated text & its signature concatenated into a
         single text mass
+  - [ ] Redo swagger
   - [ ] Redo README again
 
 - [ ] Review 2
@@ -47,6 +48,8 @@ Console-like UI for the thing
 
 - [ ] docker health checks
 - [ ] update dating: replace /public reference with reference to the frontend
+- [ ] describe justification in the frontend page: assert that someone claimed something at a
+      given date, no server-side storage, secured with modern cryptography
 
 ## Deploy
 
