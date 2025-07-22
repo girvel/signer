@@ -66,13 +66,13 @@ func (d *deps) sign(c *gin.Context) {
         return
     }
     
-	// TODO include the reference to the service
-	// TODO update README accordingly
+	// TODO mention TZ
 	datedText := fmt.Sprintf(
-		"%s\n\nSigned %s by %s",
+		"%s\n\nSigned %s by %s with public key %s/public",
 		body.Text,
 		time.Now().Format("2006-01-02 15:04:05"),
 		d.Env.HolderName,
+		d.Env.ServiceAddress,
 	)
     signature, err := d.Cryptographer.Sign(datedText)
 
