@@ -38,4 +38,5 @@ jobs:
         docker compose up -d --build --wait
         curl localhost:8080/public
         docker compose down
+        docker compose logs --no-color
 
