@@ -66,11 +66,10 @@ func (d *deps) sign(c *gin.Context) {
         return
     }
     
-	// TODO mention TZ
 	datedText := fmt.Sprintf(
 		"%s\n\nSigned %s by %s with public key %s/public",
 		body.Text,
-		time.Now().Format("2006-01-02 15:04:05"),
+		time.Now().Format("2006-01-02 15:04:05 MST"),
 		d.Env.HolderName,
 		d.Env.ServiceAddress,
 	)
