@@ -17,7 +17,7 @@ const docTemplate = `{
     "paths": {
         "/public": {
             "get": {
-                "description": "Get the public key used for signature verification",
+                "description": "Get the public key used for signature verification in PEM format",
                 "produces": [
                     "text/plain"
                 ],
@@ -57,7 +57,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Returns the signature",
                         "schema": {
-                            "$ref": "#/definitions/signer.SignOkResponse"
+                            "$ref": "#/definitions/signer.SignaturePair"
                         }
                     },
                     "400": {
@@ -92,7 +92,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/signer.VerifyBody"
+                            "$ref": "#/definitions/signer.SignaturePair"
                         }
                     }
                 ],
@@ -136,18 +136,7 @@ const docTemplate = `{
                 }
             }
         },
-        "signer.SignOkResponse": {
-            "type": "object",
-            "properties": {
-                "dated_text": {
-                    "type": "string"
-                },
-                "signature": {
-                    "type": "string"
-                }
-            }
-        },
-        "signer.VerifyBody": {
+        "signer.SignaturePair": {
             "type": "object",
             "properties": {
                 "dated_text": {

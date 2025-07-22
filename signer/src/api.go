@@ -38,7 +38,7 @@ type SignaturePair struct {
 }
 
 // @Summary Get the public key
-// @Description Get the public key used for signature verification
+// @Description Get the public key used for signature verification in PEM format
 // @Produce plain
 // @Success 200 {string} string "The key"
 // @Router /public [get]

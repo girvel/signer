@@ -21,16 +21,31 @@ The schema would become:
 - [x] POST /sign json(text) -> json(dated_text, signature)
 - [x] POST /verify json(dated_text, signature) -> json()
 
-- [ ] Finalization 2
+- [x] Finalization 2
   - [x] docker-compose
   - [x] Better README
   - [x] Do go library paths work with monorepos? (rename signer -> signer/signer)
   - [x] TODOs
-  - [ ] Review
+  - [x] Review script
 
-- [ ] Maybe it's better to keep everything in plain text, so it can easily be saved into a text
-      file; look up if there is a convention for that.
+- [ ] Review #1
+  - [ ] GH Actions: go tests, test docker compose up
+  - [ ] Missing env_file in docker-compose.yml
+  - [ ] Caching headers for /public
+  - [ ] Log internal errors & don't show them to the outside; also do that for .Public()
+
+- [ ] Release v0.1
+
+- [ ] All endpoints in plain text, keep both the dated text & its signature concatenated into a
+      single text mass
 
 ## v0.2: Front-end
 
 Console-like UI for the thing
+
+- [ ] docker health checks
+- [ ] update dating: replace /public reference with reference to the frontend
+
+## Deploy
+
+- [ ] set up the server

@@ -17,7 +17,7 @@ type CryptographerRSA struct {
 func CreateCryptographerRSA(privatePem []byte) (*CryptographerRSA, error) {
     block, _ := pem.Decode([]byte(privatePem))
     if block == nil {
-        return nil, fmt.Errorf("Failed to decode the private key")
+        return nil, fmt.Errorf("failed to decode the private key")
     }
 
     privateKey, err := x509.ParsePKCS8PrivateKey(block.Bytes)
@@ -27,7 +27,7 @@ func CreateCryptographerRSA(privatePem []byte) (*CryptographerRSA, error) {
 
     rsaPrivateKey, ok := privateKey.(*rsa.PrivateKey)
     if !ok {
-        return nil, fmt.Errorf("Given private key is not RSA")
+        return nil, fmt.Errorf("given private key is not RSA")
     }
 
     return &CryptographerRSA{rsaPrivateKey}, nil

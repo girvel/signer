@@ -9,14 +9,7 @@ definitions:
       text:
         type: string
     type: object
-  signer.SignOkResponse:
-    properties:
-      dated_text:
-        type: string
-      signature:
-        type: string
-    type: object
-  signer.VerifyBody:
+  signer.SignaturePair:
     properties:
       dated_text:
         type: string
@@ -30,7 +23,7 @@ info:
 paths:
   /public:
     get:
-      description: Get the public key used for signature verification
+      description: Get the public key used for signature verification in PEM format
       produces:
       - text/plain
       responses:
@@ -57,7 +50,7 @@ paths:
         "200":
           description: Returns the signature
           schema:
-            $ref: '#/definitions/signer.SignOkResponse'
+            $ref: '#/definitions/signer.SignaturePair'
         "400":
           description: Can't bind JSON from body
           schema:
@@ -80,7 +73,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/signer.VerifyBody'
+          $ref: '#/definitions/signer.SignaturePair'
       produces:
       - application/json
       responses:

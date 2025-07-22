@@ -28,7 +28,7 @@ end
 
 print(compile {
   prompt = "I have a pet project in go backend. I don't have a colleague to do code review; " ..
-    "can you please do it?",
+    "can you please do it? Pay attention to README, spelling and such.",
   files = {
     "README.md",
     "docker-compose.yml",
