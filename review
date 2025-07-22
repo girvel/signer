@@ -1,0 +1,42 @@
+#!/usr/bin/env luajit
+
+-- This is solo-developed project, so I use an LLM for review.
+--
+-- This script compiles the relevant project files into a prompt.
+
+local compile = function(args)
+  local result = args.prompt .. "\n\nFile structure:\n\n```\n"
+
+  do
+    local f = assert(io.popen("tree", "r"))
+    result = result .. f:read("*a") .. "```"
+    f:close()
+  end
+
+  for _, filename in ipairs(args.files) do
+    local content do
+      local f = assert(io.open(filename))
+      content = f:read("*a")
+      f:close()
+    end
+
+    result = result .. ("\n\n%s:\n\n```\n%s\n```"):format(filename, content)
+  end
+
+  return result
+end
+
+print(compile {
+  prompt = "I have a pet project in go backend. I don't have a colleague to do code review; " ..
+    "can you please do it?",
+  files = {
+    "README.md",
+    "docker-compose.yml",
+    "signer/main.go",
+    "signer/Dockerfile",
+    "signer/src/api.go",
+    "signer/src/crypto.go",
+    "signer/src/crypto_test.go",
+    "signer/src/env.go"
+  }
+})

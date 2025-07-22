@@ -25,7 +25,7 @@ The schema would become:
   - [x] docker-compose
   - [x] Better README
   - [x] Do go library paths work with monorepos? (rename signer -> signer/signer)
-  - [ ] TODOs
+  - [x] TODOs
   - [ ] Review
 
 - [ ] Maybe it's better to keep everything in plain text, so it can easily be saved into a text
