@@ -88,8 +88,6 @@ func (d *deps) sign(c *gin.Context) {
 
 type VerifyOkResponse struct {}
 
-// TODO either endpoint functions are public too, or types are private
-
 // @Summary Verify text + signature
 // @Description Verify that given signature matches given text; quality of life feature, can be done locally with the public key.
 // @Accept json
