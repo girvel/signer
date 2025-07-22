@@ -20,15 +20,22 @@ And then in 2026 the second wave of lunar expeditions hits, and people discover 
 
 ## Launch
 
+Via docker compose:
+
+1. Create `.env` file (see `.env.example`)
+2. Put your private RSA key into `signer/private.pem`
+
 ```bash
 docker compose up
 ```
 
-Go to `localhost:8080/swagger/index.html` to see docs.
+3. Go to `localhost:8080/swagger/index.html` to see docs.
+
+Also the signer service itself can be launched via `go run .` inside the folder.
 
 ## Verify the signature from command line:
 
-Dated text goes into `text.txt`, signature into `signature.bin`, public key into `public.pem`.
+(In the example, dated text goes into `text.txt`, signature into `signature.bin`, public key into `public.pem`)
 
 ```
 openssl dgst -sha256 \

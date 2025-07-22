@@ -22,7 +22,9 @@ func main() {
     cryptographer := must(signer.CreateCryptographerRSA(privatePem))
     slog.Info("initialized cryptographer")
 
-    api := signer.CreateAPI(cryptographer)
+	env := must(signer.ReadEnv())
+
+    api := signer.CreateAPI(cryptographer, env)
     slog.Info("initialized API; running it...")
 
     api.Run()

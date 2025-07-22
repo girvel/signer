@@ -1,1 +1,2 @@
-private.pem
+/signer/private.pem
+/.env

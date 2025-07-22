@@ -13,7 +13,7 @@
   - [x] Logging
   - [x] Swagger
 
-- [ ] Include signing date
+- [x] Include signing date
 
 The schema would become:
 

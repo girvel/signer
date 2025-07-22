@@ -23,6 +23,7 @@ type Cryptographer interface {
 
 type deps struct {
     cryptographer Cryptographer
+	env *Env
 }
 
 // ENDPOINTS //
@@ -65,14 +66,13 @@ func (d *deps) sign(c *gin.Context) {
         return
     }
     
-	// TODO author env var
 	// TODO include the reference to the service
 	// TODO update README accordingly
 	datedText := fmt.Sprintf(
 		"%s\n\nSigned %s by %s",
 		body.Text,
 		time.Now().Format("2006-01-02 15:04:05"),
-		"girvel",
+		d.env.HolderName,
 	)
     signature, err := d.cryptographer.Sign(datedText)
 
@@ -125,8 +125,8 @@ func (d *deps) verify(c *gin.Context) {
 
 // FACTORY //
 
-func CreateAPI(cryptographer Cryptographer) *gin.Engine {
-    d := &deps{cryptographer}
+func CreateAPI(cryptographer Cryptographer, env *Env) *gin.Engine {
+    d := &deps{cryptographer, env}
     g := gin.Default()
     
     g.GET("/public", d.public)
