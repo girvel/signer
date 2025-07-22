@@ -29,15 +29,14 @@ The schema would become:
   - [x] Review script
 
 - [ ] Review #1
-  - [ ] GH Actions: go tests, test docker compose up
+  - [x] GH Actions: go tests, test docker compose up
   - [ ] Missing env_file in docker-compose.yml
   - [ ] Caching headers for /public
   - [ ] Log internal errors & don't show them to the outside; also do that for .Public()
+  - [ ] All endpoints in plain text, keep both the dated text & its signature concatenated into a
+        single text mass
 
 - [ ] Release v0.1
-
-- [ ] All endpoints in plain text, keep both the dated text & its signature concatenated into a
-      single text mass
 
 ## v0.2: Front-end
 
