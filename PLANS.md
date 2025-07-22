@@ -23,10 +23,13 @@ The schema would become:
 
 - [ ] Finalization 2
   - [x] docker-compose
-  - [ ] Better README
+  - [x] Better README
   - [x] Do go library paths work with monorepos? (rename signer -> signer/signer)
   - [ ] TODOs
   - [ ] Review
+
+- [ ] Maybe it's better to keep everything in plain text, so it can easily be saved into a text
+      file; look up if there is a convention for that.
 
 ## v0.2: Front-end
 

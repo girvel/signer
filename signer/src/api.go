@@ -66,6 +66,8 @@ func (d *deps) sign(c *gin.Context) {
     }
     
 	// TODO author env var
+	// TODO include the reference to the service
+	// TODO update README accordingly
 	datedText := fmt.Sprintf(
 		"%s\n\nSigned %s by %s",
 		body.Text,
