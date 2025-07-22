@@ -43,6 +43,7 @@ type SignaturePair struct {
 // @Success 200 {string} string "The key"
 // @Router /public [get]
 func (d *deps) public(c *gin.Context) {
+	c.Header("Cache-Control", fmt.Sprintf("max-age=%v", d.Env.PublicCachingSecs))
     c.String(http.StatusOK, d.Cryptographer.Public())
 }
 
