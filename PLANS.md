@@ -22,9 +22,10 @@ The schema would become:
 - [x] POST /verify json(dated_text, signature) -> json()
 
 - [ ] Finalization 2
-  - [ ] docker-compose
+  - [x] docker-compose
   - [ ] Better README
   - [ ] Do go library paths work with monorepos?
+  - [ ] TODOs
   - [ ] Review
 
 ## v0.2: Front-end

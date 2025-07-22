@@ -1,0 +1,6 @@
+services:
+  signer:
+    build: signer
+    ports:
+    - 8080:8080
+
