@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	signer "github.com/girvel/signer/src"
+	signer "github.com/girvel/signer/signer/src"
 )
 
 func must[T any](result T, err error) T {

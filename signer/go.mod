@@ -1,4 +1,4 @@
-module github.com/girvel/signer
+module github.com/girvel/signer/signer
 
 go 1.24.3
 

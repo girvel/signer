@@ -10,7 +10,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
-	_ "github.com/girvel/signer/docs"
+	_ "github.com/girvel/signer/signer/docs"
 )
 
 // TYPES //

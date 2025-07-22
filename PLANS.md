@@ -24,7 +24,7 @@ The schema would become:
 - [ ] Finalization 2
   - [x] docker-compose
   - [ ] Better README
-  - [ ] Do go library paths work with monorepos?
+  - [x] Do go library paths work with monorepos? (rename signer -> signer/signer)
   - [ ] TODOs
   - [ ] Review
 
