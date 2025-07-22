@@ -35,6 +35,7 @@ The schema would become:
   - [ ] Log internal errors & don't show them to the outside; also do that for .Public()
   - [ ] All endpoints in plain text, keep both the dated text & its signature concatenated into a
         single text mass
+  - [ ] Redo README again
 
 - [ ] Release v0.1
 

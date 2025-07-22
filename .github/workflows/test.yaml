@@ -21,7 +21,7 @@ jobs:
   docker:
     name: Check docker compose
     runs-on: ubuntu-22.04
-    needs: test
+    needs: tests
     services:
       docker:
         image: docker:dind
