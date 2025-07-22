@@ -3,6 +3,7 @@ package signer
 import (
 	"encoding/base64"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"time"
 
@@ -77,6 +78,7 @@ func (d *deps) sign(c *gin.Context) {
     signature, err := d.Cryptographer.Sign(datedText)
 
     if err != nil {
+		slog.Error("Error when signing", "error", err)
         c.JSON(http.StatusInternalServerError, ErrorResponse{err.Error()})
         return
     }

@@ -32,7 +32,7 @@ The schema would become:
   - [x] GH Actions: go tests, test docker compose up
   - [x] Missing env_file in docker-compose.yml
   - [x] Caching headers for /public
-  - [ ] Log internal errors & don't show them to the outside; also do that for .Public()
+  - [x] Log internal errors
   - [ ] All endpoints in plain text, keep both the dated text & its signature concatenated into a
         single text mass
   - [ ] Redo README again

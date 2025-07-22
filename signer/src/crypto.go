@@ -58,7 +58,7 @@ func (c *CryptographerRSA) Verify(data string, signature []byte) error {
 func (c *CryptographerRSA) Public() string {
     der, err := x509.MarshalPKIXPublicKey(&c.key.PublicKey)
     if err != nil {
-        panic(err.Error())
+        panic(err.Error())  // unreachable
     }
 
     pem := pem.EncodeToMemory(&pem.Block{
