@@ -22,8 +22,8 @@ type Cryptographer interface {
 }
 
 type deps struct {
-    cryptographer Cryptographer
-	env *Env
+    Cryptographer
+	*Env
 }
 
 // ENDPOINTS //
@@ -43,7 +43,7 @@ type SignaturePair struct {
 // @Success 200 {string} string "The key"
 // @Router /public [get]
 func (d *deps) public(c *gin.Context) {
-    c.String(http.StatusOK, d.cryptographer.Public())
+    c.String(http.StatusOK, d.Cryptographer.Public())
 }
 
 type SignBody struct {
@@ -72,9 +72,9 @@ func (d *deps) sign(c *gin.Context) {
 		"%s\n\nSigned %s by %s",
 		body.Text,
 		time.Now().Format("2006-01-02 15:04:05"),
-		d.env.HolderName,
+		d.Env.HolderName,
 	)
-    signature, err := d.cryptographer.Sign(datedText)
+    signature, err := d.Cryptographer.Sign(datedText)
 
     if err != nil {
         c.JSON(http.StatusInternalServerError, ErrorResponse{err.Error()})
@@ -113,7 +113,7 @@ func (d *deps) verify(c *gin.Context) {
 		return
 	}
 
-    err = d.cryptographer.Verify(body.DatedText, rawSignature)
+    err = d.Cryptographer.Verify(body.DatedText, rawSignature)
 
     if err != nil {
 		c.JSON(http.StatusConflict, ErrorResponse{err.Error()})
