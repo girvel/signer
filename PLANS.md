@@ -49,19 +49,20 @@ Console-like UI for the thing
 - [x] Hello world
 - [x] Font
 - [x] UI: two text input fields, two buttons
-- [ ] Attach to the service
+- [x] Attach to the service
   - [x] Sign
-  - [ ] Verify
-- [ ] Color scheme
+  - [x] Verify
+- [ ] Reset output border color when text changes
 - [ ] Columns & arrow
 - [ ] Indicate if text & signed text don't match
-- [ ] Resolve TODOs
+- [ ] Color scheme
 - [ ] Report service unavailability
 - [ ] Copy button
 - [ ] Ctrl+Enter while input textarea is active -> sign
 - [ ] Ctrl+Enter while output textarea is active -> verify
 - [ ] Timezone header?
 - [ ] Checkbox to use timezone header?
+- [ ] Resolve TODOs
 
 - [ ] Thoughts:
   - [ ] docker health checks
