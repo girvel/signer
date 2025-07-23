@@ -53,11 +53,11 @@ Console-like UI for the thing
   - [x] Sign
   - [x] Verify
 - [x] Reset output border color when text changes
-- [ ] Indicate if text & signed text don't match
-- [ ] Columns & arrow
+- [x] Indicate if text & signed text don't match
+- [x] Columns & arrow
 - [ ] Color scheme
 - [ ] Report service unavailability
-- [ ] Copy button
+- [-] Copy button
 - [ ] Ctrl+Enter while input textarea is active -> sign
 - [ ] Ctrl+Enter while output textarea is active -> verify
 - [ ] Timezone header?
@@ -65,7 +65,8 @@ Console-like UI for the thing
 - [ ] Resolve TODOs
 
 - [ ] Thoughts:
-  - [ ] docker health checks
+  - [ ] docker compose for the backend only
+  - [ ] docker health checks? Are they needed for a single-service setup?
   - [ ] update dating: replace /public reference with reference to the frontend
   - [ ] describe justification in the frontend page: assert that someone claimed something at a
         given date, no server-side storage, secured with modern cryptography

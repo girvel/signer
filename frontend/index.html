@@ -8,14 +8,19 @@
   </head>
   <body>
     <main>
-      <p><label for="input">Text input:</label></p>
-      <textarea class="large-textarea" id="input"></textarea>
-      <p><label for="output">Signed output:</label></p>
-      <textarea class="large-textarea" id="output"></textarea>
-      <p>
-        <input type="button" id="sign" value="Sign" />
-        <input type="button" id="verify" value="Verify" />
-      </p>
+      <div class="flex-column-container">
+        <div class="flex-column">
+          <p><label for="input">Text input:</label></p>
+          <textarea class="large-textarea" id="input"></textarea>
+          <p><input type="button" id="sign" value="Sign" /></p>
+        </div>
+        <div class="flex-column-arrow">=></div>
+        <div>
+          <p><label for="output">Signed output:</label></p>
+          <textarea class="large-textarea" id="output"></textarea>
+          <p><input type="button" id="verify" value="Verify" /></p>
+        </div>
+      </div>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
