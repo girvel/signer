@@ -52,9 +52,9 @@ Console-like UI for the thing
 - [x] Attach to the service
   - [x] Sign
   - [x] Verify
-- [ ] Reset output border color when text changes
-- [ ] Columns & arrow
+- [x] Reset output border color when text changes
 - [ ] Indicate if text & signed text don't match
+- [ ] Columns & arrow
 - [ ] Color scheme
 - [ ] Report service unavailability
 - [ ] Copy button
