@@ -47,7 +47,7 @@ The schema would become:
 Console-like UI for the thing
 
 - [x] Hello world
-- [ ] Font
+- [x] Font
 - [ ] UI: two text input fields, arrow, two buttons
 - [ ] Attach to the service
 
