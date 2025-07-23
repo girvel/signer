@@ -8,7 +8,7 @@ local compile = function(args)
   local result = args.prompt .. "\n\nFile structure:\n\n```\n"
 
   do
-    local f = assert(io.popen("tree", "r"))
+    local f = assert(io.popen("tree -a -I '.git'", "r"))
     result = result .. f:read("*a") .. "```"
     f:close()
   end
