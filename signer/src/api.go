@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
-	"time"
 	"strings"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -134,6 +135,7 @@ func (d *deps) verify(c *gin.Context) {
 func CreateAPI(cryptographer Cryptographer, env *Env) *gin.Engine {
     d := &deps{cryptographer, env}
     g := gin.Default()
+	g.Use(cors.Default())
     
     g.GET("/public", d.public)
     g.POST("/sign", d.sign)
