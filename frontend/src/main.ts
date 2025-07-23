@@ -37,6 +37,8 @@ elements.sign.onclick = ev => {
   api.post('/sign', elements.input.value)
     .then(response => {
       elements.output.value = response.data;
+      setValidity("input", "valid");
+      setValidity("output", "valid");
     });
 };
 
@@ -58,4 +60,9 @@ elements.verify.onclick = ev => {
 
 elements.output.oninput = _ => {
   setValidity("output", "undefined");
+  setValidity("input", "undefined");
+};
+
+elements.input.oninput = _ => {
+  setValidity("input", "undefined");
 };
