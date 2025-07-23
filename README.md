@@ -29,7 +29,7 @@ All endpoints accept and respond with plain text.
 Via docker compose:
 
 1. Create `.env` file (see `.env.example`)
-2. Put your private RSA key into `signer/private.pem`
+2. Put your private RSA key into `signer/private.pem` (in PEM PKCS#8 format)
 
 ```bash
 docker compose up

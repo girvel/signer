@@ -9,7 +9,7 @@ import (
 
 func must[T any](result T, err error) T {
     if err != nil {
-        slog.Error(err.Error())
+        slog.Error("initialization failed", "error", err)
         panic("must() failed")
     }
     return result
