@@ -10,6 +10,10 @@ body {
   font-family: 'JetBrains Mono';
 }
 
+textarea, input {
+  font-family: inherit;
+}
+
 .large-textarea {
   min-width: 400px;
   min-height: 150px;
