@@ -55,11 +55,12 @@ Console-like UI for the thing
 - [x] Reset output border color when text changes
 - [x] Indicate if text & signed text don't match
 - [x] Columns & arrow
+- [x] Ctrl+Enter while input textarea is active -> sign
+- [x] Ctrl+Enter while output textarea is active -> verify
+- [ ] Controller object
 - [ ] Color scheme
 - [ ] Report service unavailability
 - [-] Copy button
-- [ ] Ctrl+Enter while input textarea is active -> sign
-- [ ] Ctrl+Enter while output textarea is active -> verify
 - [ ] Timezone header?
 - [ ] Checkbox to use timezone header?
 - [ ] Resolve TODOs

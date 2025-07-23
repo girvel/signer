@@ -32,37 +32,53 @@ const setValidity = (target: "input" | "output", value: Validity) => {
   validity[target] = value;
 };
 
-elements.sign.onclick = ev => {
-  console.log(ev);
-  api.post('/sign', elements.input.value)
-    .then(response => {
-      elements.output.value = response.data;
-      setValidity("input", "valid");
-      setValidity("output", "valid");
-    });
+const sign = async () => {
+  const response = await api.post('/sign', elements.input.value);
+  elements.output.value = response.data;
+  setValidity("input", "valid");
+  setValidity("output", "valid");
 };
 
-elements.verify.onclick = ev => {
-  console.log(ev);
-  api.post('/verify', elements.output.value)
-    .then(_ => {
-      setValidity("output", "valid");
-    })
-    .catch(err => {
-      if (err.status < 500) {
-        setValidity("output", "invalid");
-      } else {
-        // TODO report internal error
-        // TODO handle all networking errors in one place?
-      }
-    });
+const verify = async () => {
+  try {
+    await api.post('/verify', elements.output.value);
+    setValidity("output", "valid");
+  } catch (err) {
+    setValidity("output", "invalid");
+    // TODO report internal error
+    // TODO handle all networking errors in one place?
+  }
 };
 
-elements.output.oninput = _ => {
+elements.sign.addEventListener('click', async (ev: MouseEvent) => {
+  console.log(ev);
+  await sign();
+});
+
+elements.input.addEventListener('keydown', async (ev: KeyboardEvent) => {
+  if (!(ev.ctrlKey && ev.key == 'Enter')) return;
+  ev.preventDefault();
+  console.log(ev);
+  await sign();
+});
+
+elements.verify.addEventListener('click', async (ev: MouseEvent) => {
+  console.log(ev);
+  await verify();
+});
+
+elements.output.addEventListener('keydown', async (ev: KeyboardEvent) => {
+  if (!(ev.ctrlKey && ev.key == 'Enter')) return;
+  ev.preventDefault();
+  console.log(ev);
+  await verify();
+});
+
+elements.output.addEventListener('input', _ => {
   setValidity("output", "undefined");
   setValidity("input", "undefined");
-};
+});
 
-elements.input.oninput = _ => {
+elements.input.addEventListener('input', _ => {
   setValidity("input", "undefined");
-};
+});
