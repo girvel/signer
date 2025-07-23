@@ -28,7 +28,7 @@ The schema would become:
   - [x] TODOs
   - [x] Review script
 
-- [ ] Review #1
+- [x] Review #1
   - [x] GH Actions: go tests, test docker compose up
   - [x] Missing env_file in docker-compose.yml
   - [x] Caching headers for /public
@@ -46,10 +46,19 @@ The schema would become:
 
 Console-like UI for the thing
 
-- [ ] docker health checks
-- [ ] update dating: replace /public reference with reference to the frontend
-- [ ] describe justification in the frontend page: assert that someone claimed something at a
-      given date, no server-side storage, secured with modern cryptography
+- [x] Hello world
+- [ ] Font
+- [ ] UI: two text input fields, arrow, two buttons
+- [ ] Attach to the service
+
+- [ ] Thoughts:
+  - [ ] docker health checks
+  - [ ] update dating: replace /public reference with reference to the frontend
+  - [ ] describe justification in the frontend page: assert that someone claimed something at a
+        given date, no server-side storage, secured with modern cryptography
+  - [ ] how to deploy JS?
+  - [ ] made by girvel
+  - [ ] display owner
 
 ## Deploy
 
