@@ -38,9 +38,9 @@ The schema would become:
   - [x] Redo swagger
   - [x] Redo README again
 
-- [ ] Review 2
+- [x] Review 2
 
-- [ ] Release v0.1
+- [x] Release v0.1
 
 ## v0.2: Front-end
 
