@@ -36,7 +36,7 @@ The schema would become:
   - [x] All endpoints in plain text, keep both the dated text & its signature concatenated into a
         single text mass
   - [x] Redo swagger
-  - [ ] Redo README again
+  - [x] Redo README again
 
 - [ ] Review 2
 
