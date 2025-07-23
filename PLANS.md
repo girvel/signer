@@ -48,8 +48,11 @@ Console-like UI for the thing
 
 - [x] Hello world
 - [x] Font
-- [ ] UI: two text input fields, arrow, two buttons
+- [x] UI: two text input fields, two buttons
 - [ ] Attach to the service
+- [ ] Color scheme
+- [ ] Columns & arrow
+- [ ] Indicate if text & signed text don't match
 
 - [ ] Thoughts:
   - [ ] docker health checks

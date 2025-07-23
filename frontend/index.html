@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <p>Hello, world!</p>
+    <main>
+      <p><label for="input">Text input:</label></p>
+      <textarea id="input"></textarea>
+      <p><label for="output">Signed output:</label></p>
+      <textarea id="output"></textarea>
+      <p>
+        <input type="button" id="sign" value="Sign" />
+        <input type="button" id="verify" value="Verify" />
+      </p>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
