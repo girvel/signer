@@ -30,15 +30,6 @@ type deps struct {
 
 // ENDPOINTS //
 
-type ErrorResponse struct {
-    Error string `json:"error"`
-}
-
-type SignaturePair struct {
-    DatedText string `json:"dated_text"`
-	Signature string `json:"signature"`
-}
-
 // @Summary Get the public key
 // @Description Get the public key used for signature verification in PEM format
 // @Produce plain
@@ -49,18 +40,15 @@ func (d *deps) public(c *gin.Context) {
     c.String(http.StatusOK, d.Cryptographer.Public())
 }
 
-type SignBody struct {
-    Text string `json:"text"`
-}
-
 // @Summary Sign the given text
 // @Description Get an RSA PSS signature for given text
-// @Accept json
-// @Produce json
-// @Param body body signer.SignBody true "Text to sign"
-// @Success 200 {object} signer.SignaturePair "Returns the signature"
-// @Failure 400 {object} signer.ErrorResponse "Can't bind JSON from body"
-// @Failure 500 {object} signer.ErrorResponse "Issues with cryptography algorithm"
+// @Accept plain
+// @Produce plain
+// @Param body body string true "Text to sign"
+// @Success 200 {string} string "Returns the dated text with a signature"
+// @Failure 400 {string} string "Can't read body"
+// @Failure 415 {string} string "Content-Type is not text/plain"
+// @Failure 500 {string} string "Issues with cryptography algorithm"
 // @Router /sign [post]
 func (d *deps) sign(c *gin.Context) {
 	if c.GetHeader("Content-Type") != "text/plain" {
@@ -92,16 +80,15 @@ func (d *deps) sign(c *gin.Context) {
 	c.String(http.StatusOK, datedText + "\n\n" + base64.StdEncoding.EncodeToString(signature))
 }
 
-type VerifyOkResponse struct {}
-
 // @Summary Verify text + signature
-// @Description Verify that given signature matches given text; quality of life feature, can be done locally with the public key.
-// @Accept json
-// @Produce json
-// @Param body body signer.SignaturePair true "Data-signature pair to verify; signature can be passed as base-64 string"
-// @Success 200 {object} signer.VerifyOkResponse "Signature matches"
-// @Failure 400 {object} signer.ErrorResponse "Bad JSON"
-// @Failure 409 {object} signer.ErrorResponse "Signature doesn't match"
+// @Description Verify given signed text; quality of life feature, can be done locally with the public key.
+// @Accept plain
+// @Produce plain
+// @Param body body string true "Signed text to verify; "
+// @Success 200 {string} string "Signature matches"
+// @Failure 400 {string} string "Can't read body"
+// @Failure 409 {string} string "Signature doesn't match"
+// @Failure 415 {string} string "Content-Type is not text/plain"
 // @Router /verify [post]
 func (d *deps) verify(c *gin.Context) {
 	if c.GetHeader("Content-Type") != "text/plain" {

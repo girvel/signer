@@ -35,7 +35,7 @@ The schema would become:
   - [x] Log internal errors
   - [x] All endpoints in plain text, keep both the dated text & its signature concatenated into a
         single text mass
-  - [ ] Redo swagger
+  - [x] Redo swagger
   - [ ] Redo README again
 
 - [ ] Review 2

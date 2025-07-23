@@ -36,10 +36,10 @@ const docTemplate = `{
             "post": {
                 "description": "Get an RSA PSS signature for given text",
                 "consumes": [
-                    "application/json"
+                    "text/plain"
                 ],
                 "produces": [
-                    "application/json"
+                    "text/plain"
                 ],
                 "summary": "Sign the given text",
                 "parameters": [
@@ -49,27 +49,33 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/signer.SignBody"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Returns the signature",
+                        "description": "Returns the dated text with a signature",
                         "schema": {
-                            "$ref": "#/definitions/signer.SignaturePair"
+                            "type": "string"
                         }
                     },
                     "400": {
-                        "description": "Can't bind JSON from body",
+                        "description": "Can't read body",
                         "schema": {
-                            "$ref": "#/definitions/signer.ErrorResponse"
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Content-Type is not text/plain",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "500": {
                         "description": "Issues with cryptography algorithm",
                         "schema": {
-                            "$ref": "#/definitions/signer.ErrorResponse"
+                            "type": "string"
                         }
                     }
                 }
@@ -77,22 +83,22 @@ const docTemplate = `{
         },
         "/verify": {
             "post": {
-                "description": "Verify that given signature matches given text; quality of life feature, can be done locally with the public key.",
+                "description": "Verify given signed text; quality of life feature, can be done locally with the public key.",
                 "consumes": [
-                    "application/json"
+                    "text/plain"
                 ],
                 "produces": [
-                    "application/json"
+                    "text/plain"
                 ],
                 "summary": "Verify text + signature",
                 "parameters": [
                     {
-                        "description": "Data-signature pair to verify; signature can be passed as base-64 string",
+                        "description": "Signed text to verify; ",
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/signer.SignaturePair"
+                            "type": "string"
                         }
                     }
                 ],
@@ -100,55 +106,29 @@ const docTemplate = `{
                     "200": {
                         "description": "Signature matches",
                         "schema": {
-                            "$ref": "#/definitions/signer.VerifyOkResponse"
+                            "type": "string"
                         }
                     },
                     "400": {
-                        "description": "Bad JSON",
+                        "description": "Can't read body",
                         "schema": {
-                            "$ref": "#/definitions/signer.ErrorResponse"
+                            "type": "string"
                         }
                     },
                     "409": {
                         "description": "Signature doesn't match",
                         "schema": {
-                            "$ref": "#/definitions/signer.ErrorResponse"
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Content-Type is not text/plain",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
             }
-        }
-    },
-    "definitions": {
-        "signer.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string"
-                }
-            }
-        },
-        "signer.SignBody": {
-            "type": "object",
-            "properties": {
-                "text": {
-                    "type": "string"
-                }
-            }
-        },
-        "signer.SignaturePair": {
-            "type": "object",
-            "properties": {
-                "dated_text": {
-                    "type": "string"
-                },
-                "signature": {
-                    "type": "string"
-                }
-            }
-        },
-        "signer.VerifyOkResponse": {
-            "type": "object"
         }
     }
 }`
