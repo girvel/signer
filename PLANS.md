@@ -57,23 +57,26 @@ Console-like UI for the thing
 - [x] Columns & arrow
 - [x] Ctrl+Enter while input textarea is active -> sign
 - [x] Ctrl+Enter while output textarea is active -> verify
-- [ ] Controller object
-- [ ] Color scheme
+- [x] Controller object
+- [ ] Copy button
 - [ ] Report service unavailability
-- [-] Copy button
-- [ ] Timezone header?
-- [ ] Checkbox to use timezone header?
+- [ ] Color scheme
 - [ ] Resolve TODOs
+- [ ] Review
 
 - [ ] Thoughts:
   - [ ] docker compose for the backend only
   - [ ] docker health checks? Are they needed for a single-service setup?
   - [ ] update dating: replace /public reference with reference to the frontend
-  - [ ] describe justification in the frontend page: assert that someone claimed something at a
+  - [x] describe justification in the frontend page: assert that someone claimed something at a
         given date, no server-side storage, secured with modern cryptography
   - [ ] how to deploy JS?
-  - [ ] made by girvel
+  - [x] made by girvel
   - [ ] display owner
+
+- [ ] Maybe later:
+    - [ ] Timezone header?
+    - [ ] Checkbox to use timezone header?
 
 ## Deploy
 

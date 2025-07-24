@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
+    <h1><span id="holder-name"></span>'s signer</h1>
     <main>
       <div class="flex-column-container">
         <div class="flex-column">
@@ -22,6 +23,14 @@
         </div>
       </div>
     </main>
+    <footer>
+      <p>
+        Signer is a service, allowing user to sign any text, making it cryptographically verifiable that the given text was signed at the given date. No server-side storage, modern cryptography algorithms, the signature can be verified offline using <span id="signer-url"></span>/public.
+      </p>
+      <p>
+        Made by <a href="https://github.com/girvel">girvel</a>
+      </p>
+    </footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
