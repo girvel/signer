@@ -1,4 +1,4 @@
-import type { AxiosInstance } from "axios";
+import { Api } from "./api";
 
 export type Validity = "valid" | "invalid" | "undefined";
 export type Elements = {
@@ -8,7 +8,7 @@ export type Elements = {
   verify: HTMLInputElement,
 };
 
-export const CreateController = (elements: Elements, api: AxiosInstance) => {
+export const CreateController = (elements: Elements) => {
   return {
     _validity: {
       input: "undefined",
@@ -26,7 +26,7 @@ export const CreateController = (elements: Elements, api: AxiosInstance) => {
     },
 
     async Sign() {
-      const response = await api.post('/sign', elements.input.value);
+      const response = await Api.post('/sign', elements.input.value);
       elements.output.value = response.data;
       this.SetValidity("input", "valid");
       this.SetValidity("output", "valid");
@@ -34,7 +34,7 @@ export const CreateController = (elements: Elements, api: AxiosInstance) => {
 
     async Verify() {
       try {
-        await api.post('/verify', elements.output.value);
+        await Api.post('/verify', elements.output.value);
         this.SetValidity("output", "valid");
       } catch (err) {
         this.SetValidity("output", "invalid");

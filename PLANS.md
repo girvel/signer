@@ -60,7 +60,6 @@ Console-like UI for the thing
 - [x] Controller object
 - [ ] Copy button
 - [ ] Report service unavailability
-- [ ] Color scheme
 - [ ] Resolve TODOs
 - [ ] Review
 
@@ -75,8 +74,9 @@ Console-like UI for the thing
   - [ ] display owner
 
 - [ ] Maybe later:
-    - [ ] Timezone header?
-    - [ ] Checkbox to use timezone header?
+  - [ ] Timezone header?
+  - [ ] Checkbox to use timezone header?
+  - [ ] Color scheme
 
 ## Deploy
 

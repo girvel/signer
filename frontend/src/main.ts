@@ -1,14 +1,20 @@
-import { Api } from "./api";
 import { CreateController } from "./controller";
+import { GetEnv } from "./env";
 
 const elements = {
   input: document.getElementById("input") as HTMLTextAreaElement,
   output: document.getElementById("output") as HTMLTextAreaElement,
   sign: document.getElementById("sign")! as HTMLInputElement,
   verify: document.getElementById("verify")! as HTMLInputElement,
+  ownerName: document.getElementById("owner-name") as HTMLSpanElement,
+  apiUrl: document.getElementById("api-url") as HTMLSpanElement,
 };
 
-const controller = CreateController(elements, Api);
+const controller = CreateController(elements);
+const env = GetEnv();
+
+elements.ownerName.textContent = env.VITE_OWNER_NAME; // TODO maybe fetch it? or not?
+elements.apiUrl.textContent = env.VITE_API_URL;
 
 elements.sign.addEventListener('click', async (ev: MouseEvent) => {
   console.log(ev);
